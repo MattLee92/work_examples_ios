@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
-    var photo: Photo! = Photo(title: "", tags: [], url: "", data: nil)
+    var photo: Photo! = Photo(title: "", tags: [], url: "")
     @IBOutlet weak var imageview: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()

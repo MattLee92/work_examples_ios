@@ -13,7 +13,7 @@ class PhotoCollectionTests: XCTestCase {
     
     //Test Setters and getters for Photo Class
     func testPhoto(){
-        let myphoto = Photo(title: "SomeTitle", tags: ["sometag", "gu", "Griffith"], url: "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png",data: nil)
+        let myphoto = Photo(title: "SomeTitle", tags: ["sometag", "gu", "Griffith"], url: "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png")
         XCTAssertEqual(myphoto.title, "SomeTitle")
         XCTAssertEqual(myphoto.tags, ["sometag", "gu", "Griffith"])
         XCTAssertEqual(myphoto.url, "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png")
@@ -22,7 +22,7 @@ class PhotoCollectionTests: XCTestCase {
     
     //Test adding to an empty array (Beginning and End of Array)
     func testEmptyArray(){
-        let mytags = Photo(title: "SomeTitle", tags: [], url: "www.someurl.com.au", data: nil)
+        let mytags = Photo(title: "SomeTitle", tags: [], url: "www.someurl.com.au")
         //Append first value
         mytags.tags.append("First Value")
         //Insert begginging value at index 0
@@ -42,7 +42,7 @@ class PhotoCollectionTests: XCTestCase {
     //Test adding to non-empty Array (Beggining middle and end)
     func testNonEmptyArray(){
         //Initial array elements
-        let mytags = Photo(title: "SomeTitle", tags: ["First", "Second"], url: "www.someurl.com.au", data: nil)
+        let mytags = Photo(title: "SomeTitle", tags: ["First", "Second"], url: "www.someurl.com.au")
         // declare varialble to keep count of elelments
         var count = mytags.tags.count
         //insert first element at index 0

@@ -14,11 +14,11 @@ class Photo {
     var url: String
     var data: NSData?
     
-    init(title: String, tags: [String], url: String, data: NSData?){
+    init(title: String, tags: [String], url: String){
         self.title = title
         self.tags = tags
         self.url = url
-        self.data = data
+    
     }
     
     func loadimage(completionhandler: (data: NSData?) -> Void) {
