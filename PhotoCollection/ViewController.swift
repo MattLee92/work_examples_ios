@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
+    var photo: Photo! = Photo(title: "", tags: [], url: "", data: nil)
+    @IBOutlet weak var imageview: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,6 +22,31 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        let urlString = textField.text
+        photo.url = urlString
+        let conToImage: (NSData?) -> Void = {
+            if let d = photo.data {
+                let image = UIImage(data: d)
+                self.imageview.image=image
+            } else {
+                self.imageview.image=nil
+            }
+            textField.resignFirstResponder()
+        }
+            if let d = photo.data {
+               conToImage(d)
+            } else {
+                photo.loadimage(conToImage)
+            }
+        
+    
+            return true
+        }
+    
+
+    
+    
 
 }
 

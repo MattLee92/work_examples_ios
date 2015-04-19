@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Js1-lJ-Qrx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gK6-ye-j3H">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Collection View Controller-->
+        <!--Collection-->
         <scene sceneID="qMo-ok-TY9">
             <objects>
                 <collectionViewController id="Js1-lJ-Qrx" sceneMemberID="viewController">
@@ -26,6 +27,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="Ypm-13-YJm"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -33,12 +37,13 @@
                             <outlet property="delegate" destination="Js1-lJ-Qrx" id="3FT-A9-YLy"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" title="Collection" id="CjG-mJ-y7D"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rnm-kB-hP7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-235" y="333"/>
+            <point key="canvasLocation" x="577" y="333"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PhotoCollection" customModuleProvider="target" sceneMemberID="viewController">
@@ -46,15 +51,59 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UWD-p7-9Xe">
+                                <rect key="frame" x="19" y="104" width="563" height="391"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter URL" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Mn-IM-RXV">
+                                <rect key="frame" x="16" y="72" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="65l-vT-E5N"/>
+                                </connections>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UWD-p7-9Xe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="3" id="G5b-jT-srT"/>
+                            <constraint firstItem="UWD-p7-9Xe" firstAttribute="top" secondItem="4Mn-IM-RXV" secondAttribute="bottom" constant="30" id="KSg-jg-zUy"/>
+                            <constraint firstItem="4Mn-IM-RXV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Q8a-nr-yWX"/>
+                            <constraint firstItem="4Mn-IM-RXV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Wgt-89-RyH"/>
+                            <constraint firstItem="4Mn-IM-RXV" firstAttribute="centerX" secondItem="UWD-p7-9Xe" secondAttribute="centerX" id="f5g-6R-MmP"/>
+                            <constraint firstItem="4Mn-IM-RXV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="24" id="nLm-HM-Yai"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UWD-p7-9Xe" secondAttribute="bottom" constant="105" id="onX-85-2ue"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Detail" id="efT-RL-fbJ"/>
+                    <connections>
+                        <outlet property="imageview" destination="UWD-p7-9Xe" id="EeM-rs-ur7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="455" y="333"/>
+            <point key="canvasLocation" x="1270" y="333"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MwF-Wx-b4N">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gK6-ye-j3H" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6eQ-ce-QFc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Js1-lJ-Qrx" kind="relationship" relationship="rootViewController" id="Tdx-0u-d56"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kVA-RO-S5N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-235" y="333"/>
         </scene>
     </scenes>
 </document>
