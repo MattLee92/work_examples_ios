@@ -18,6 +18,13 @@ class PhotosCollectionViewController: UICollectionViewController {
 
         let photo = Photo(title: "",tags: [],url: "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png")
         photos.append(photo)
+        photos.append(photo)
+        photos.append(photo)
+        photos.append(photo)
+        photos.append(photo)
+        photos.append(photo)
+        photos.append(photo)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -75,12 +82,13 @@ class PhotosCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDelegate
 
-    /*
+    
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        performSegueWithIdentifier("ShowDetail", sender: self)
         return true
     }
-    */
+    
 
     /*
     // Uncomment this method to specify if the specified item should be selected

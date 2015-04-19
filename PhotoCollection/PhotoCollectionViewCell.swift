@@ -12,8 +12,12 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView
     
    override init(frame: CGRect) {
+   
         imageView = UIImageView(frame: frame)
+        imageView.contentMode = .ScaleAspectFit
         super.init(frame: frame)
+        let bounds = self.bounds
+        imageView.frame = bounds
         addSubview(imageView)
     }
 
