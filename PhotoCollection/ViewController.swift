@@ -26,7 +26,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let urlString = textField.text
         photo.url = urlString
         let conToImage: (NSData?) -> Void = {
-            if let d = photo.data {
+            if let d = $0 {
                 let image = UIImage(data: d)
                 self.imageview.image=image
             } else {
