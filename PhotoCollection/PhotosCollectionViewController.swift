@@ -10,20 +10,21 @@ import UIKit
 
 let reuseIdentifier = "Cell"
 
-class PhotosCollectionViewController: UICollectionViewController {
+class PhotosCollectionViewController: UICollectionViewController, DetailViewControllerDelegate {
 
     var photos = Array<Photo>()
+    var currentPhoto: Photo!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let photo = Photo(title: "",tags: [],url: "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png")
-        photos.append(photo)
-        photos.append(photo)
-        photos.append(photo)
-        photos.append(photo)
-        photos.append(photo)
-        photos.append(photo)
-        photos.append(photo)
+        let photo = Photo(title: "Griffith Logo",tags: ["GU","Logo"],url: "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png")
+        //photos.append(photo)
+        //photos.append(photo)
+        //photos.append(photo)
+       // photos.append(photo)
+       // photos.append(photo)
+       // photos.append(photo)
+       // photos.append(photo)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -33,21 +34,44 @@ class PhotosCollectionViewController: UICollectionViewController {
 
         // Do any additional setup after loading the view.
     }
-
+    
+    @IBAction func AddPhoto(sender: AnyObject) {
+        
+        currentPhoto = Photo(title: "", tags: [], url: "")
+        photos.append(currentPhoto)
+        performSegueWithIdentifier("ShowDetail", sender: self)
+    }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        
+        if let cell = sender as? UICollectionViewCell {
+            let indexPath = collectionView?.indexPathForCell(cell)
+            currentPhoto = photos[indexPath!.row]
+        }
+        if let dvc = segue.destinationViewController as? DetailViewController {
+            dvc.photo = currentPhoto
+            dvc.delegate = self
+            
+        }
+        
     }
-    */
+    
+    func detailViewController(dvc: DetailViewController, photo: Photo){
+        navigationController?.popToViewController(self, animated: true)
+            collectionView?.reloadData()
+    }
+
 
     // MARK: UICollectionViewDataSource
 
