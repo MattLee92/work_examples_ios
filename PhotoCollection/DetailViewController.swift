@@ -16,7 +16,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
 
     var delegate: DetailViewControllerDelegate!
     var photo: Photo! //= Photo(title: "", tags: [], url: "")
-   
+    var newphoto: Bool = false
     @IBOutlet weak var imageview: UIImageView!
     @IBOutlet weak var txt_title: UITextField!
     @IBOutlet weak var txt_tags: UITextField!
@@ -33,14 +33,16 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func AddPhoto(sender: AnyObject) {
+        
         if let title = txt_title.text {
             if let tags = txt_tags.text {
                 if let url = txt_url.text{
                     photo.title = title
                     photo.tags.append(tags)
                     photo.url = url
-                    delegate.detailViewController(self, photo: photo)
                     photo.data = nil
+                    delegate.detailViewController(self, photo: photo)
+                 
                 }
             }
         }
@@ -69,13 +71,16 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         }
     
     override func viewWillAppear(animated: Bool) {
+        
+            
         txt_title.text = photo.title
         if photo.tags.count != 0 {
+            
             txt_tags.text = photo.tags[0]
         }
         txt_url.text = photo.url
         photo.data = nil
-      
+        
     }
     
     

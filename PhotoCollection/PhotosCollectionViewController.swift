@@ -10,22 +10,13 @@ import UIKit
 
 let reuseIdentifier = "Cell"
 
-class PhotosCollectionViewController: UICollectionViewController, DetailViewControllerDelegate {
+class PhotosCollectionViewController: UICollectionViewController, DetailViewControllerDelegate  {
 
     var photos = Array<Photo>()
     var currentPhoto: Photo!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let photo = Photo(title: "Griffith Logo",tags: ["GU","Logo"],url: "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png")
-        //photos.append(photo)
-        //photos.append(photo)
-        //photos.append(photo)
-       // photos.append(photo)
-       // photos.append(photo)
-       // photos.append(photo)
-       // photos.append(photo)
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -54,16 +45,21 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if let cell = sender as? UICollectionViewCell {
-            let indexPath = collectionView?.indexPathForCell(cell)
+     /*
+        if let cell = sender as? PhotoCollectionViewCell {
+         let indexPath = collectionView?.indexPathForCell(cell)!
             currentPhoto = photos[indexPath!.row]
-        }
+           println("SELECTED")
+       } else {
+           println("ERROR")
+         
+       } */
         if let dvc = segue.destinationViewController as? DetailViewController {
             dvc.photo = currentPhoto
             dvc.delegate = self
             
         }
+        
         
     }
     
@@ -109,7 +105,8 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        performSegueWithIdentifier("ShowDetail", sender: self)
+        currentPhoto = photos[indexPath.row]
+        self.performSegueWithIdentifier("ShowDetail", sender: self)
         return true
     }
     

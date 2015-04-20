@@ -19,7 +19,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="BbX-l6-lQD" customClass="PhotoCollectionViewCell" customModule="PhotoCollection" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="BbX-l6-lQD" customClass="PhotoCollectionViewCell" customModule="PhotoCollection">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -69,8 +69,8 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="65l-vT-E5N"/>
                                 </connections>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UWD-p7-9Xe">
-                                <rect key="frame" x="267" y="386" width="317" height="140"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UWD-p7-9Xe">
+                                <rect key="frame" x="237" y="286" width="317" height="140"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6j8-Kn-80I">
                                 <rect key="frame" x="46" y="102" width="508" height="30"/>
@@ -101,7 +101,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Image Preview" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tct-67-y7C">
-                                <rect key="frame" x="63" y="445" width="113" height="21"/>
+                                <rect key="frame" x="116" y="345" width="113" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -109,13 +109,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UWD-p7-9Xe" secondAttribute="bottom" constant="74" id="CGg-yy-17f"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UWD-p7-9Xe" secondAttribute="bottom" constant="130" id="CGg-yy-17f"/>
                             <constraint firstItem="4Mn-IM-RXV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="184" id="KdX-sl-Irk"/>
                             <constraint firstItem="4Mn-IM-RXV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="b7P-as-FQE"/>
-                            <constraint firstItem="UWD-p7-9Xe" firstAttribute="trailing" secondItem="4Mn-IM-RXV" secondAttribute="trailing" constant="30" id="d0U-Dm-GUS"/>
+                            <constraint firstItem="UWD-p7-9Xe" firstAttribute="trailing" secondItem="4Mn-IM-RXV" secondAttribute="trailing" id="d0U-Dm-GUS"/>
                             <constraint firstItem="4Mn-IM-RXV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="-30" id="kfP-8q-Q01"/>
-                            <constraint firstItem="UWD-p7-9Xe" firstAttribute="top" secondItem="4Mn-IM-RXV" secondAttribute="bottom" constant="108" id="nxt-Fc-iEn"/>
-                            <constraint firstItem="4Mn-IM-RXV" firstAttribute="leading" secondItem="UWD-p7-9Xe" secondAttribute="leading" constant="-221" id="ucM-HN-x4S"/>
+                            <constraint firstItem="UWD-p7-9Xe" firstAttribute="top" secondItem="4Mn-IM-RXV" secondAttribute="bottom" constant="8" id="nxt-Fc-iEn"/>
+                            <constraint firstItem="4Mn-IM-RXV" firstAttribute="leading" secondItem="UWD-p7-9Xe" secondAttribute="leading" constant="-191" id="ucM-HN-x4S"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
