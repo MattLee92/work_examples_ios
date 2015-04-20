@@ -3,11 +3,13 @@
 //  PhotoCollection
 //
 //  Created by Matthew Lee on 19/04/2015.
+//  Student ID: s2818045
 //  Copyright (c) 2015 Matthew Lee. All rights reserved.
 //
 
 import UIKit
 
+// Custom class for Cells of CollectionView (PhotoCollectionViewCell)
 class PhotoCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView
     

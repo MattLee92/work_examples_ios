@@ -3,17 +3,20 @@
 //  PhotoCollection
 //
 //  Created by Matthew Lee on 19/04/2015.
+//  Student ID: s2818045
 //  Copyright (c) 2015 Matthew Lee. All rights reserved.
 //
 
 import Foundation
 
 class Photo {
+    // Varialbes of Photo
     var title: String
     var tags: [String]
     var url: String
     var data: NSData?
     
+    //Initialise variables
     init(title: String, tags: [String], url: String){
         self.title = title
         self.tags = tags
@@ -21,6 +24,7 @@ class Photo {
     
     }
     
+    //Downloads data from given URL and converts to image
     func loadimage(completionhandler: (data: NSData?) -> Void) {
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)
         dispatch_async(queue) {

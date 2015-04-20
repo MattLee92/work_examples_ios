@@ -3,6 +3,7 @@
 //  PhotoCollection
 //
 //  Created by Matthew Lee on 19/04/2015.
+//  Student ID: S2818045
 //  Copyright (c) 2015 Matthew Lee. All rights reserved.
 //
 
@@ -15,8 +16,8 @@ protocol DetailViewControllerDelegate{
 class DetailViewController: UIViewController, UITextFieldDelegate {
 
     var delegate: DetailViewControllerDelegate!
-    var photo: Photo! //= Photo(title: "", tags: [], url: "")
-    var newphoto: Bool = false
+    var photo: Photo!
+    
     @IBOutlet weak var imageview: UIImageView!
     @IBOutlet weak var txt_title: UITextField!
     @IBOutlet weak var txt_tags: UITextField!
@@ -32,8 +33,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    //Updates current photo with edits the user has entered in the text feilds (if all feilds are entered)
     @IBAction func AddPhoto(sender: AnyObject) {
-        
         if let title = txt_title.text {
             if let tags = txt_tags.text {
                 if let url = txt_url.text{
@@ -42,12 +43,12 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
                     photo.url = url
                     photo.data = nil
                     delegate.detailViewController(self, photo: photo)
-                 
                 }
             }
         }
     }
     
+    //Function to retrive image from photo.data or download image as appropriate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         let urlString = textField.text
         photo.url = urlString
@@ -65,22 +66,19 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             } else {
                 photo.loadimage(conToImage)
             }
-        
     
             return true
-        }
+    }
     
+    //Populates detail view with data from Photo if the user has selected a previous entry
     override func viewWillAppear(animated: Bool) {
-        
-            
         txt_title.text = photo.title
+        //Condition to stop reading non-existing elements from an empty array
         if photo.tags.count != 0 {
-            
             txt_tags.text = photo.tags[0]
         }
         txt_url.text = photo.url
         photo.data = nil
-        
     }
     
     
