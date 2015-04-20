@@ -39,7 +39,11 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             if let tags = txt_tags.text {
                 if let url = txt_url.text{
                     photo.title = title
-                    photo.tags.append(tags)
+                    // Seperates Strings based on " " character (Whitespace) and adds them to the photo.tags array
+                    let sepChar = NSCharacterSet(charactersInString: " ")
+                    let tag = txt_tags.text
+                    photo.tags = tag.componentsSeparatedByCharactersInSet(sepChar)
+                    
                     photo.url = url
                     photo.data = nil
                     delegate.detailViewController(self, photo: photo)
@@ -75,7 +79,11 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         txt_title.text = photo.title
         //Condition to stop reading non-existing elements from an empty array
         if photo.tags.count != 0 {
-            txt_tags.text = photo.tags[0]
+            // Reads each element from the photo.tags array and concatonates into a string
+            for tag in photo.tags {
+               txt_tags.text = "\(txt_tags.text) \(tag)"
+            }
+           
         }
         txt_url.text = photo.url
         photo.data = nil
