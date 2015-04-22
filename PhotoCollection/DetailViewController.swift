@@ -52,6 +52,29 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
+    @IBAction func DeletePhoto(sender: AnyObject) {
+        
+        let alert = UIAlertController(title: "Confirm Deletion", message: "Are you sure you wish to delete \(txt_title.text)?", preferredStyle: .ActionSheet)
+        
+        let deleteaction = UIAlertAction(title: "Delete", style: .Destructive){ alertAction in
+            
+            //Delete Photo
+            
+            self.delegate.detailViewController(self, photo:self.photo)
+        }
+        let cancelaction = UIAlertAction(title: "Cancel", style: .Cancel){ alertAction in
+            //Cancel Delete Photo
+        }
+        alert.addAction(deleteaction)
+        alert.addAction(cancelaction)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
     //Function to retrive image from photo.data or download image as appropriate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         let urlString = textField.text

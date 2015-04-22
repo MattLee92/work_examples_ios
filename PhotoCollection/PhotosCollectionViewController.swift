@@ -58,6 +58,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
             collectionView?.reloadData()
     }
 
+  
 
     // MARK: UICollectionViewDataSource
 

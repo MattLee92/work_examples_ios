@@ -139,6 +139,11 @@
                                 <action selector="AddPhoto:" destination="BYZ-38-t0r" id="kfy-AA-O6b"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="R0e-U3-ild">
+                            <connections>
+                                <action selector="DeletePhoto:" destination="BYZ-38-t0r" id="mOT-bN-Ck2"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

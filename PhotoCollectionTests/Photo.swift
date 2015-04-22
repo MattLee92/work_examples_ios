@@ -33,8 +33,10 @@ class Photo {
 
     convenience init(propertyList: NSArray) {
         self.init(title: "", tags: [], url: "")
-        title = propertyList.objectAtIndex(0) as String
         
+        for photo in propertyList {
+            
+        }
     }
     
     
