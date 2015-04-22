@@ -9,6 +9,8 @@
 
 import Foundation
 
+var mainQueue = dispatch_get_main_queue()
+
 class Photo {
     // Varialbes of Photo
     var title: String
@@ -24,11 +26,24 @@ class Photo {
     
     }
     
+    func propertyList() -> NSArray{
+        let pl: NSArray = []
+        return pl
+    }
+
+    convenience init(propertyList: NSArray) {
+        self.init(title: "", tags: [], url: "")
+        title = propertyList.objectAtIndex(0) as String
+        
+    }
+    
+    
+    
+    
     //Downloads data from given URL and converts to image
     func loadimage(completionhandler: (data: NSData?) -> Void) {
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)
         dispatch_async(queue) {
-            let mainQueue = dispatch_get_main_queue()
             if let url = NSURL(string: self.url){
                 if let data = NSData(contentsOfURL: url) {
                     dispatch_async(mainQueue){
