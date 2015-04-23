@@ -19,10 +19,10 @@ class Photo {
     var data: NSData?
     
     //Initialise variables
-    init(title: String, tags: [String], url: String){
-        self.title = title
-        self.tags = tags
-        self.url = url
+    init(){//title: String, tags: [String], url: String){
+        title = ""
+        tags = []
+        url = ""
     
     }
         
@@ -47,26 +47,42 @@ class Photo {
     
 }
 
-protocol PropertyList { func writeToFile(path: String, atomically useAuxiliaryFile: Bool) -> Bool }
-
-    //extension NSArray: PropertyList {
+protocol PropertyList { func writeToFile(path: String, atomically useAuxiliaryFile: Bool) -> Bool
     
-    extension NSDictionary: PropertyList {
-        
-    }
-
-protocol PropertyListSerialise{
-        func propertyList() -> PropertyList
 }
 
 
-
-extension Photo: PropertyListSerialise {
+//extension NSMutableArray: PropertyList {
     
-    func propertyList() -> PropertyList{
-        let pld: NSDictionary=["title": title, "tags": tags, "url": url ]
-        let pl: NSArray = []
+    extension NSDictionary: PropertyList {
+}
+
+protocol PropertyListSerialise{
+    func propertyList() -> PropertyList
+}
+
+private let titleKey = "Dtitle"
+private let tagKey = "Dtag"
+private let urlKey = "Durl"
+
+extension Photo {
+    
+    func propertyListRep() -> NSDictionary {
+        let pld: NSDictionary=[
+            titleKey : title,
+            tagKey : tags,
+            urlKey : url
+        ]
+        //let pl: NSMutableArray = []
         return pld
+    }
+    
+    convenience init(PropertyList: NSDictionary){
+        self.init()
+        title = PropertyList.objectForKey(titleKey) as String
+        tags = PropertyList.objectForKey(tagKey) as Array
+        url = PropertyList.objectForKey(urlKey) as String
+        
     }
 
     

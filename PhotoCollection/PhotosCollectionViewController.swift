@@ -36,7 +36,30 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     @IBAction func load(sender: AnyObject) {
         let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
         let fileName = saveDir.stringByAppendingPathComponent("data.plist")
+        let fileContent = NSArray(contentsOfFile: fileName) as Array<NSDictionary>
+        let arrayReadPhotos = fileContent.map{ Photo(PropertyList: $0)}
+        photos = arrayReadPhotos
+        collectionView?.reloadData()
         
+        /*
+        
+        if let pl2 = NSArray(contentsOfFile: fileName){
+            let testprop = Photo(PropertyList: pl2)
+           
+            println(testprop.title)
+        
+            
+            for dataobject : AnyObject in pl2 {
+                if let data = dataobject as? Photo {
+                    photos.append(data as Photo)
+                    println(data)
+
+                }
+            }
+    
+        } */
+        
+        /*
          if let loadedphoto = NSMutableDictionary(contentsOfFile: fileName) {
             if let Ltitle = loadedphoto.objectForKey("title") as? String {
                 if let Ltags = loadedphoto.objectForKey("tags") as? [String] {
@@ -46,7 +69,12 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
                     }
                 }
             }
-        }
+        } */
+        
+        
+        collectionView?.reloadData()
+        
+        
     }
     
     override func viewDidLoad() {
@@ -69,7 +97,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     //Adds a new 'empty' instance of photo and saves it to the photos array
     //segues to detail for for user to enter data
     @IBAction func AddPhoto(sender: AnyObject) {
-        currentPhoto = Photo(title: "", tags: [], url: "")
+        currentPhoto = Photo()
         photos.append(currentPhoto)
         performSegueWithIdentifier("ShowDetail", sender: self)
     }
@@ -83,22 +111,14 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     }
     
     private func SaveToFile(){
-        
-        for elements in photos {
-            //Add photos to property list
-        }
-        
-        
-        
-        let pho = Photo(title: "TEST", tags: ["1", "2"], url: "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png")
-        let pl = pho.propertyList()
+       // let phoToSave: Photo = currentPhoto
+
+        let arrayPLIST: NSArray = photos.map { $0.propertyListRep()}
         let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
         let fileName = saveDir.stringByAppendingPathComponent("data.plist")
-        let test = pl.writeToFile(fileName, atomically: true)
-        println("SAVE TO FILE \(test)")
-        
-    }
+         arrayPLIST.writeToFile(fileName, atomically: true)
     
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -198,3 +218,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     */
 
 }
+
+
+
+

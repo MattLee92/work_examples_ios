@@ -13,7 +13,10 @@ class PhotoCollectionTests: XCTestCase {
     
     //Test Setters and getters for Photo Class
     func testPhoto(){
-        let myphoto = Photo(title: "SomeTitle", tags: ["sometag", "gu", "Griffith"], url: "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png")
+        let myphoto = Photo()
+        myphoto.title = "SomeTitle"
+        myphoto.tags = ["sometag", "gu", "Griffith"]
+        myphoto.url = "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png"
         XCTAssertEqual(myphoto.title, "SomeTitle")
         XCTAssertEqual(myphoto.tags, ["sometag", "gu", "Griffith"])
         XCTAssertEqual(myphoto.url, "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png")
@@ -22,7 +25,10 @@ class PhotoCollectionTests: XCTestCase {
     
     //Test adding to an empty array (Beginning and End of Array)
     func testEmptyArray(){
-        let mytags = Photo(title: "SomeTitle", tags: [], url: "www.someurl.com.au")
+        let mytags = Photo()
+        mytags.title = "Some Title"
+        mytags.tags = []
+        mytags.url = "wwww.url.com.au"
         //Append first value
         mytags.tags.append("First Value")
         //Insert begginging value at index 0
@@ -42,7 +48,11 @@ class PhotoCollectionTests: XCTestCase {
     //Test adding to non-empty Array (Beggining middle and end)
     func testNonEmptyArray(){
         //Initial array elements
-        let mytags = Photo(title: "SomeTitle", tags: ["First", "Second"], url: "www.someurl.com.au")
+        let mytags = Photo()
+        mytags.title = "Some Title"
+        mytags.tags = ["First", "Second"]
+        mytags.url = "wwww.url.com.au"
+
         // declare varialble to keep count of elelments
         var count = mytags.tags.count
         //insert first element at index 0
@@ -72,7 +82,10 @@ class PhotoCollectionTests: XCTestCase {
         //Set mainQueue to a low priority backgroung queue
         mainQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)
         //set myphoto with test values
-        let myphoto = Photo(title: "SomeTitle", tags: ["sometag", "gu", "Griffith"], url: "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png")
+        let myphoto = Photo()
+        myphoto.title = "Some Title"
+        myphoto.tags = ["tag", "tag"]
+        myphoto.url = "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png"
         //variable to determine if download is complete
         var downloadcomplete = false
         //Call loadimage function from Photo class
@@ -91,11 +104,14 @@ class PhotoCollectionTests: XCTestCase {
         XCTAssertNotNil(UIImage(data: myphoto.data!), "Not an Image")
         
     }
-    
+    /*
     //Test Save Photo to file
     func testSavePhoto(){
         //Set Test Photo
-        let myphoto = Photo(title: "Sometitle", tags: ["tag1", "tag2"], url: "www.someurl.com.au")
+        let myphoto = Photo()
+        myphoto.title = "Some Title"
+        myphoto.tags = ["tag", "tag"]
+        myphoto.url = "www.someurl.com.au"
         // Assign pl the property list from Photo class
         let pl = myphoto.propertyList()
         //Set the path and filename of the file to write to
@@ -117,7 +133,7 @@ class PhotoCollectionTests: XCTestCase {
     }
     
     
-    
+    */
     
     
     
