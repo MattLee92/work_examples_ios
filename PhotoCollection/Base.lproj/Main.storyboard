@@ -120,7 +120,6 @@
                             <constraint firstItem="Tct-67-y7C" firstAttribute="top" secondItem="4Mn-IM-RXV" secondAttribute="bottom" constant="8" symbolic="YES" id="Q4l-xP-3hJ"/>
                             <constraint firstItem="UWD-p7-9Xe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="97" id="SA2-4n-Oqs"/>
                             <constraint firstItem="4Mn-IM-RXV" firstAttribute="top" secondItem="lho-4l-kTC" secondAttribute="bottom" constant="8" symbolic="YES" id="Sao-3H-DGe"/>
-                            <constraint firstItem="4Mn-IM-RXV" firstAttribute="centerX" secondItem="Tct-67-y7C" secondAttribute="centerX" id="Uf3-xn-8di"/>
                             <constraint firstItem="1BG-sR-y9F" firstAttribute="leading" secondItem="6j8-Kn-80I" secondAttribute="leading" id="Wm8-g3-eHR"/>
                             <constraint firstItem="UWD-p7-9Xe" firstAttribute="top" secondItem="Tct-67-y7C" secondAttribute="bottom" constant="8" symbolic="YES" id="YJZ-st-luy"/>
                             <constraint firstItem="lho-4l-kTC" firstAttribute="top" secondItem="1BG-sR-y9F" secondAttribute="bottom" constant="12" id="cVf-ug-Ecj"/>
@@ -131,6 +130,7 @@
                             <constraint firstItem="6j8-Kn-80I" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="vza-4y-SeU"/>
                             <constraint firstItem="6j8-Kn-80I" firstAttribute="trailing" secondItem="1BG-sR-y9F" secondAttribute="trailing" id="wPE-Bh-CsR"/>
                             <constraint firstAttribute="centerX" secondItem="f9G-Qj-6kw" secondAttribute="centerX" constant="4.5" id="xlH-fm-5kL"/>
+                            <constraint firstAttribute="centerX" secondItem="Tct-67-y7C" secondAttribute="centerX" constant="-0.5" id="yE9-Os-F8K"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

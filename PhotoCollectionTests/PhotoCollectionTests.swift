@@ -104,41 +104,37 @@ class PhotoCollectionTests: XCTestCase {
         XCTAssertNotNil(UIImage(data: myphoto.data!), "Not an Image")
         
     }
-    /*
+    
     //Test Save Photo to file
-    func testSavePhoto(){
-        //Set Test Photo
-        let myphoto = Photo()
-        myphoto.title = "Some Title"
-        myphoto.tags = ["tag", "tag"]
-        myphoto.url = "www.someurl.com.au"
-        // Assign pl the property list from Photo class
-        let pl = myphoto.propertyList()
-        //Set the path and filename of the file to write to
-        let dirs = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let filename = dirs + "/testData.plist"
-        //Assert that the data was written to the file
-        XCTAssertTrue(pl.writeToFile(filename,atomically: true), "Could Not Write to File")
+     func TestSaveToFile() {
+        let photo1 = Photo()
+        photo1.title = "SomeTitle1"
+        photo1.tags = ["tag1","tag2"]
+        photo1.url = "www.someurl.com.au"
+        let photo2 = Photo()
+        photo2.title = "SomeTitle2"
+        photo2.tags = ["tag1","tag2"]
+        photo2.url = "www.someurl.com.au"
+        var photos: Array<Photo> = [photo1, photo2]
+        //convert array of photos to NSArray of NSDictionary of photos.
+        let arrayPLIST: NSArray = photos.map { $0.propertyListRep()}
+        //Get the file path and name
+        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let fileName = saveDir.stringByAppendingPathComponent("data.plist")
+        //Write array to file
+        XCTAssertTrue(arrayPLIST.writeToFile(fileName, atomically: true), "Could not write")
     }
     
     //Test load from File
-    func testLoadPhoto(){
-        //Get the path and filename to read from
-        let dirs = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let filename = dirs + "/testData.plist"
-        // Set pl2 to the contents of the file
-        let pl2 = NSArray(contentsOfFile: filename)
-        //Assert that pl2 is not nil thus file was read from
-        XCTAssertNotNil(pl2, "Could not Read from File")
+    func TestLoadFromFile() {
+        //Get the file path and name
+        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let fileName = saveDir.stringByAppendingPathComponent("data.plist")
+        //Get dictionary of photos and convert them back to an array of photos
+        let fileContent = NSArray(contentsOfFile: fileName) as Array<NSDictionary>
+        let arrayReadPhotos = fileContent.map{ Photo(PropertyList: $0)}
+        XCTAssertNotNil(arrayReadPhotos, "Could not read")
+     
     }
-    
-    
-    */
-    
-    
-    
-    
-    
-    
     
 }

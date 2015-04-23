@@ -20,7 +20,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     var delegate: DetailViewControllerDelegate!
     var photo: Photo!
     
-    //Outlets for textfields
+    //Outlets for textfields that receive user entered data
     @IBOutlet weak var imageview: UIImageView!
     @IBOutlet weak var txt_title: UITextField!
     @IBOutlet weak var txt_tags: UITextField!

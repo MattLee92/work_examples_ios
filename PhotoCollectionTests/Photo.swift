@@ -24,6 +24,8 @@ class Photo {
         title = ""
         tags = []
         url = ""
+        
+        
     
     }
         
