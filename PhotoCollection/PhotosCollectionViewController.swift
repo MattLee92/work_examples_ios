@@ -11,21 +11,46 @@ import UIKit
 
 let reuseIdentifier = "Cell"
 
+
+
 class PhotosCollectionViewController: UICollectionViewController, DetailViewControllerDelegate  {
 
     //Variables for Photos
     var photos = Array<Photo>()
     var currentPhoto: Photo!
+    var currentIndex: Int!
+    var deletePhoto: Bool = false
+
+    
+    override func viewDidAppear(animated: Bool) {
+        if deletePhoto == true {
+            DeletePhoto()
+        }
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
+      
+        
+        // Set photos array to the contents of the file
+        let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let filename = ("\(dir)/data.plist")
+        
+        if let loadedphoto = NSArray(contentsOfFile: filename){
+            photos = loadedphoto as Array
+        }
+        
         // Register cell classes
         self.collectionView!.registerClass(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
+        
     }
     
     //Adds a new 'empty' instance of photo and saves it to the photos array
@@ -35,6 +60,17 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
         photos.append(currentPhoto)
         performSegueWithIdentifier("ShowDetail", sender: self)
     }
+    
+    private func DeletePhoto(){
+        
+            photos.removeAtIndex(currentIndex)
+            collectionView?.reloadData()
+            // Write changes to file??
+        
+    }
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -53,12 +89,13 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
         }
     }
     
-    func detailViewController(dvc: DetailViewController, photo: Photo){
-        navigationController?.popToViewController(self, animated: true)
-            collectionView?.reloadData()
-    }
-
+    func detailViewController(dvc: DetailViewController, photo: Photo, del: Bool){
+       navigationController?.popToViewController(self, animated: true)
+           collectionView?.reloadData()
+            deletePhoto = del
+   }
   
+    
 
     // MARK: UICollectionViewDataSource
 
@@ -75,6 +112,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
 
     //Set the image for the Cells of the Collection view
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as PhotoCollectionViewCell
         let photo = photos[indexPath.row]
             if let d = photo.data {
@@ -87,6 +125,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
                     }
                 }
             }
+        
         return cell
     }
 
@@ -96,8 +135,11 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         currentPhoto = photos[indexPath.row]
+        currentIndex = indexPath.row
         self.performSegueWithIdentifier("ShowDetail", sender: self)
+       
         return true
+      
     }
     
 
@@ -106,11 +148,12 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
-    */
+    
 
-    /*
+    
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
     override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
         return false
     }
 
@@ -119,6 +162,8 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     }
 
     override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+   
+       
     
     }
     */

@@ -10,7 +10,7 @@
 import UIKit
 
 protocol DetailViewControllerDelegate{
-    func detailViewController(dvc: DetailViewController, photo: Photo)
+    func detailViewController(dvc: DetailViewController, photo: Photo, del: Bool)
 }
 
 class DetailViewController: UIViewController, UITextFieldDelegate {
@@ -22,6 +22,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var txt_title: UITextField!
     @IBOutlet weak var txt_tags: UITextField!
     @IBOutlet weak var txt_url: UITextField!
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +48,12 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
                     
                     photo.url = url
                     photo.data = nil
-                    delegate.detailViewController(self, photo: photo)
+                    delegate.detailViewController(self, photo: photo, del: false)
                 }
             }
         }
     }
+    
     
     
     @IBAction func DeletePhoto(sender: AnyObject) {
@@ -59,10 +62,10 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         
         let deleteaction = UIAlertAction(title: "Delete", style: .Destructive){ alertAction in
             
-            //Delete Photo
+            self.delegate.detailViewController(self, photo: self.photo, del: true)
+       
             
-            self.delegate.detailViewController(self, photo:self.photo)
-        }
+                    }
         let cancelaction = UIAlertAction(title: "Cancel", style: .Cancel){ alertAction in
             //Cancel Delete Photo
         }
@@ -70,9 +73,6 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         alert.addAction(cancelaction)
         presentViewController(alert, animated: true, completion: nil)
     }
-    
-    
-    
     
     
     //Function to retrive image from photo.data or download image as appropriate

@@ -25,23 +25,7 @@ class Photo {
         self.url = url
     
     }
-    
-    func propertyList() -> NSArray{
-        let pl: NSArray = []
-        return pl
-    }
-
-    convenience init(propertyList: NSArray) {
-        self.init(title: "", tags: [], url: "")
         
-        for photo in propertyList {
-            
-        }
-    }
-    
-    
-    
-    
     //Downloads data from given URL and converts to image
     func loadimage(completionhandler: (data: NSData?) -> Void) {
         let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)
@@ -62,3 +46,32 @@ class Photo {
     }
     
 }
+
+protocol PropertyList { func writeToFile(path: String, atomically useAuxiliaryFile: Bool) -> Bool }
+
+    extension NSArray: PropertyList {
+        
+    }
+
+protocol PropertyListSerialise{
+        func propertyList() -> PropertyList
+}
+
+
+
+extension Photo: PropertyListSerialise {
+    
+    func propertyList() -> PropertyList{
+        let pl: NSArray = [Photo(title: title, tags: tags, url: url)]
+        return pl
+    }
+
+    
+    
+}
+
+
+
+
+
+
