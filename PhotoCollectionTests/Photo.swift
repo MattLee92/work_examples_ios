@@ -9,6 +9,7 @@
 
 import Foundation
 
+//Queue to dispatch to from aysnc download
 var mainQueue = dispatch_get_main_queue()
 
 class Photo {
@@ -40,7 +41,7 @@ class Photo {
                 }
             }
             dispatch_async(mainQueue){
-                completionhandler(data: nil)
+            completionhandler(data: nil)
             }
         }
     }
@@ -51,42 +52,30 @@ protocol PropertyList { func writeToFile(path: String, atomically useAuxiliaryFi
     
 }
 
-
-//extension NSMutableArray: PropertyList {
-    
-    extension NSDictionary: PropertyList {
-}
-
-protocol PropertyListSerialise{
-    func propertyList() -> PropertyList
-}
-
+//Constants for Dictionary Keys
 private let titleKey = "Dtitle"
 private let tagKey = "Dtag"
 private let urlKey = "Durl"
 
+//Property list extention to Photo class
 extension Photo {
     
+    //Function to Store instance of Photo as NSDictionary (property list)
     func propertyListRep() -> NSDictionary {
         let pld: NSDictionary=[
             titleKey : title,
             tagKey : tags,
             urlKey : url
         ]
-        //let pl: NSMutableArray = []
         return pld
     }
-    
+    //Convenience init for reading from property list
     convenience init(PropertyList: NSDictionary){
         self.init()
         title = PropertyList.objectForKey(titleKey) as String
         tags = PropertyList.objectForKey(tagKey) as Array
         url = PropertyList.objectForKey(urlKey) as String
-        
     }
-
-    
-    
 }
 
 

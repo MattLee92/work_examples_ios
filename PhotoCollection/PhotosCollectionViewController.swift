@@ -19,74 +19,23 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     var photos = Array<Photo>()
     var currentPhoto: Photo!
     var currentIndex: Int!
+    //deletePhoto returns true if delegate protocol returns true (i.e. user selected delete)
     var deletePhoto: Bool = false
 
-    
     override func viewDidAppear(animated: Bool) {
+        //Check delete condition if true call DeletePhoto() function
         if deletePhoto == true {
             DeletePhoto()
         }
-        //SaveToFile()
+       
     }
-    
-    
-    @IBAction func SAvePRess(sender: AnyObject) {
-        SaveToFile()
-    }
-    @IBAction func load(sender: AnyObject) {
-        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
-        let fileName = saveDir.stringByAppendingPathComponent("data.plist")
-        let fileContent = NSArray(contentsOfFile: fileName) as Array<NSDictionary>
-        let arrayReadPhotos = fileContent.map{ Photo(PropertyList: $0)}
-        photos = arrayReadPhotos
-        collectionView?.reloadData()
-        
-        /*
-        
-        if let pl2 = NSArray(contentsOfFile: fileName){
-            let testprop = Photo(PropertyList: pl2)
-           
-            println(testprop.title)
-        
-            
-            for dataobject : AnyObject in pl2 {
-                if let data = dataobject as? Photo {
-                    photos.append(data as Photo)
-                    println(data)
-
-                }
-            }
-    
-        } */
-        
-        /*
-         if let loadedphoto = NSMutableDictionary(contentsOfFile: fileName) {
-            if let Ltitle = loadedphoto.objectForKey("title") as? String {
-                if let Ltags = loadedphoto.objectForKey("tags") as? [String] {
-                    if let Lurl = loadedphoto.objectForKey("url") as? String {
-                        photos.append(Photo(title: Ltitle, tags: Ltags, url: Lurl) )
-                        collectionView?.reloadData()
-                    }
-                }
-            }
-        } */
-        
-        
-        collectionView?.reloadData()
-        
-        
-    }
-    
+    //This method calls the function to load data from file (persistance)
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        LoadFromFile()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-      
-        
         // Set photos array to the contents of the file
-        
         // Register cell classes
         self.collectionView!.registerClass(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
@@ -102,23 +51,41 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
         performSegueWithIdentifier("ShowDetail", sender: self)
     }
     
+    //If user selects delete action photo is removed from array, collectionview is updated and plist file is updated
+    //This is called by viewDidAppear (condition is tested there)
     private func DeletePhoto(){
-        
-            photos.removeAtIndex(currentIndex)
-            collectionView?.reloadData()
-            // Write changes to file??
+        //Removes the photo at the currentIndex (The photo the user selected)
+        photos.removeAtIndex(currentIndex)
+        collectionView?.reloadData()
+        //Calls function to save photos to file
+        SaveToFile()
         
     }
     
+    //Saves photos to property lists and writes to file
     private func SaveToFile(){
-       // let phoToSave: Photo = currentPhoto
-
+        //convert array of photos to NSArray of NSDictionary of photos.
         let arrayPLIST: NSArray = photos.map { $0.propertyListRep()}
+        //Get the file path and name
         let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
         let fileName = saveDir.stringByAppendingPathComponent("data.plist")
+        //Write array to file
          arrayPLIST.writeToFile(fileName, atomically: true)
-    
     }
+    
+    private func LoadFromFile() {
+         //Get the file path and name
+        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let fileName = saveDir.stringByAppendingPathComponent("data.plist")
+        //Get dictionary of photos and convert them back to an array of photos
+        let fileContent = NSArray(contentsOfFile: fileName) as Array<NSDictionary>
+        let arrayReadPhotos = fileContent.map{ Photo(PropertyList: $0)}
+        //Put newly converted array of photos in models photo array
+        photos = arrayReadPhotos
+        //Refresh the colletion data
+        collectionView?.reloadData()
+    }
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -141,6 +108,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     func detailViewController(dvc: DetailViewController, photo: Photo, del: Bool){
        navigationController?.popToViewController(self, animated: true)
            collectionView?.reloadData()
+            //Set delete photo to del (this will be true if the user has selected the delete option from DetailView)
             deletePhoto = del
    }
   
@@ -161,7 +129,6 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
 
     //Set the image for the Cells of the Collection view
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as PhotoCollectionViewCell
         let photo = photos[indexPath.row]
             if let d = photo.data {
@@ -174,7 +141,8 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
                     }
                 }
             }
-        
+        //Save any changes back to file
+        SaveToFile()
         return cell
     }
 
@@ -183,14 +151,13 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        //Set the current photo to what the user has selected and present the DetailView for said photo
         currentPhoto = photos[indexPath.row]
+        //Set currentIndex in case user deletes photo
         currentIndex = indexPath.row
         self.performSegueWithIdentifier("ShowDetail", sender: self)
-       
         return true
-      
     }
-    
 
     /*
     // Uncomment this method to specify if the specified item should be selected

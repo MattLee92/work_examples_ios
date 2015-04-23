@@ -9,15 +9,18 @@
 
 import UIKit
 
+//Delegate protocol for DetailView
 protocol DetailViewControllerDelegate{
     func detailViewController(dvc: DetailViewController, photo: Photo, del: Bool)
 }
 
 class DetailViewController: UIViewController, UITextFieldDelegate {
 
+    //Variables for DetailView
     var delegate: DetailViewControllerDelegate!
     var photo: Photo!
     
+    //Outlets for textfields
     @IBOutlet weak var imageview: UIImageView!
     @IBOutlet weak var txt_title: UITextField!
     @IBOutlet weak var txt_tags: UITextField!
@@ -45,7 +48,6 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
                     let sepChar = NSCharacterSet(charactersInString: " ")
                     let tag = txt_tags.text
                     photo.tags = tag.componentsSeparatedByCharactersInSet(sepChar)
-                    
                     photo.url = url
                     photo.data = nil
                     delegate.detailViewController(self, photo: photo, del: false)
@@ -54,23 +56,24 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
-    
+    //Configures and displays Delete option via UIAlert Sheet
     @IBAction func DeletePhoto(sender: AnyObject) {
-        
+        //Set Details for Alert Sheet
         let alert = UIAlertController(title: "Confirm Deletion", message: "Are you sure you wish to delete \(txt_title.text)?", preferredStyle: .ActionSheet)
-        
+        //Configure delete action
         let deleteaction = UIAlertAction(title: "Delete", style: .Destructive){ alertAction in
-            
+            //Delete Photo
+            //delegate view controller returns 'true' for del(delete) thus data is deleted from model
             self.delegate.detailViewController(self, photo: self.photo, del: true)
-       
-            
-                    }
+        }
+        //Configure cancel action
         let cancelaction = UIAlertAction(title: "Cancel", style: .Cancel){ alertAction in
             //Cancel Delete Photo
         }
+        //Add actions configured above
         alert.addAction(deleteaction)
         alert.addAction(cancelaction)
+        //Show alert sheet
         presentViewController(alert, animated: true, completion: nil)
     }
     
@@ -106,7 +109,6 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             for tag in photo.tags {
                txt_tags.text = "\(txt_tags.text) \(tag)"
             }
-           
         }
         txt_url.text = photo.url
         photo.data = nil
