@@ -26,9 +26,13 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
         if deletePhoto == true {
             DeletePhoto()
         }
+        //SaveToFile()
     }
     
     
+    @IBAction func SAvePRess(sender: AnyObject) {
+        SaveToFile()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +43,13 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
       
         
         // Set photos array to the contents of the file
-        let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let filename = ("\(dir)/data.plist")
+        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let fileName = saveDir.stringByAppendingPathComponent("data.plist")
+      //  var loadedphoto = NSMutableArray()
+         let loadedphoto = NSMutableArray(contentsOfFile: fileName)!
         
-        if let loadedphoto = NSArray(contentsOfFile: filename){
-            photos = loadedphoto as Array
-        }
+        println(loadedphoto.firstObject?.title)
+        
         
         // Register cell classes
         self.collectionView!.registerClass(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -69,6 +74,15 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
         
     }
     
+    private func SaveToFile(){
+        let pho = Photo(title: "TEST", tags: ["1", "2"], url: "www.www.www")
+        let pl = pho.propertyList()
+        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let fileName = saveDir.stringByAppendingPathComponent("data.plist")
+        let test = pl.writeToFile(fileName, atomically: true)
+        println("SAVE TO FILE \(test)")
+        
+    }
     
     
     

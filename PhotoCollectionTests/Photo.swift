@@ -49,7 +49,9 @@ class Photo {
 
 protocol PropertyList { func writeToFile(path: String, atomically useAuxiliaryFile: Bool) -> Bool }
 
-    extension NSArray: PropertyList {
+    //extension NSArray: PropertyList {
+    
+    extension NSDictionary: PropertyList {
         
     }
 
@@ -62,8 +64,9 @@ protocol PropertyListSerialise{
 extension Photo: PropertyListSerialise {
     
     func propertyList() -> PropertyList{
-        let pl: NSArray = [Photo(title: title, tags: tags, url: url)]
-        return pl
+        let pld: NSDictionary=["title": title, "tags": tags, "url": url ]
+        //let pl: NSArray = []
+        return pld
     }
 
     

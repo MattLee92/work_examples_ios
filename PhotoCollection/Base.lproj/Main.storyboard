@@ -12,6 +12,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="DVF-wo-nS9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="e9O-bR-VKh">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -38,6 +39,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Photo Collection" id="CjG-mJ-y7D">
+                        <barButtonItem key="leftBarButtonItem" title="Test Save" id="OOt-dW-9J1">
+                            <connections>
+                                <action selector="SAvePRess:" destination="Js1-lJ-Qrx" id="nvR-4A-Mgt"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4CJ-fG-l5j">
                             <connections>
                                 <action selector="AddPhoto:" destination="Js1-lJ-Qrx" id="ulR-PL-BDg"/>
