@@ -41,10 +41,8 @@ class PhotoCollectionTests: XCTestCase {
         XCTAssertEqual(expected[0],mytags.tags[0])
         XCTAssertEqual(expected[1],mytags.tags[1])
         XCTAssertEqual(expected[2],mytags.tags[2])
-        
-        
     }
-    
+
     //Test adding to non-empty Array (Beggining middle and end)
     func testNonEmptyArray(){
         //Initial array elements
@@ -106,7 +104,7 @@ class PhotoCollectionTests: XCTestCase {
     }
     
     //Test Save Photo to file
-     func TestSaveToFile() {
+    func TestSaveToFile() {
         let photo1 = Photo()
         photo1.title = "SomeTitle1"
         photo1.tags = ["tag1","tag2"]
