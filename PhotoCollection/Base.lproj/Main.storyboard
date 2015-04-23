@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Photo Collection-->
+        <!--Photos Collection View Controller-->
         <scene sceneID="qMo-ok-TY9">
             <objects>
                 <collectionViewController id="Js1-lJ-Qrx" customClass="PhotosCollectionViewController" customModule="PhotoCollection" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,12 +38,23 @@
                             <outlet property="delegate" destination="Js1-lJ-Qrx" id="3FT-A9-YLy"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Photo Collection" id="CjG-mJ-y7D">
+                    <navigationItem key="navigationItem" id="CjG-mJ-y7D">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Test Save" id="OOt-dW-9J1">
                             <connections>
                                 <action selector="SAvePRess:" destination="Js1-lJ-Qrx" id="nvR-4A-Mgt"/>
                             </connections>
                         </barButtonItem>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="f71-3I-qPg">
+                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="load:" destination="Js1-lJ-Qrx" eventType="touchUpInside" id="4zI-nV-vIN"/>
+                            </connections>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4CJ-fG-l5j">
                             <connections>
                                 <action selector="AddPhoto:" destination="Js1-lJ-Qrx" id="ulR-PL-BDg"/>

@@ -33,6 +33,21 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     @IBAction func SAvePRess(sender: AnyObject) {
         SaveToFile()
     }
+    @IBAction func load(sender: AnyObject) {
+        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let fileName = saveDir.stringByAppendingPathComponent("data.plist")
+        
+         if let loadedphoto = NSMutableDictionary(contentsOfFile: fileName) {
+            if let Ltitle = loadedphoto.objectForKey("title") as? String {
+                if let Ltags = loadedphoto.objectForKey("tags") as? [String] {
+                    if let Lurl = loadedphoto.objectForKey("url") as? String {
+                        photos.append(Photo(title: Ltitle, tags: Ltags, url: Lurl) )
+                        collectionView?.reloadData()
+                    }
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +58,6 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
       
         
         // Set photos array to the contents of the file
-        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
-        let fileName = saveDir.stringByAppendingPathComponent("data.plist")
-      //  var loadedphoto = NSMutableArray()
-         let loadedphoto = NSMutableDictionary(contentsOfFile: fileName)!
-        
-        println(loadedphoto.objectForKey("title"))
-        
         
         // Register cell classes
         self.collectionView!.registerClass(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -75,7 +83,14 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     }
     
     private func SaveToFile(){
-        let pho = Photo(title: "TEST", tags: ["1", "2"], url: "www.www.www")
+        
+        for elements in photos {
+            //Add photos to property list
+        }
+        
+        
+        
+        let pho = Photo(title: "TEST", tags: ["1", "2"], url: "http://www.griffith.edu.au/__data/assets/image/0019/632332/gu-header-logo.png")
         let pl = pho.propertyList()
         let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
         let fileName = saveDir.stringByAppendingPathComponent("data.plist")

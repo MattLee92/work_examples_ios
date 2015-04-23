@@ -65,7 +65,7 @@ extension Photo: PropertyListSerialise {
     
     func propertyList() -> PropertyList{
         let pld: NSDictionary=["title": title, "tags": tags, "url": url ]
-        //let pl: NSArray = []
+        let pl: NSArray = []
         return pld
     }
 
