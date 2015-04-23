@@ -46,9 +46,9 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
         let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
         let fileName = saveDir.stringByAppendingPathComponent("data.plist")
       //  var loadedphoto = NSMutableArray()
-         let loadedphoto = NSMutableArray(contentsOfFile: fileName)!
+         let loadedphoto = NSMutableDictionary(contentsOfFile: fileName)!
         
-        println(loadedphoto.firstObject?.title)
+        println(loadedphoto.objectForKey("title"))
         
         
         // Register cell classes
