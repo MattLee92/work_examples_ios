@@ -59,7 +59,7 @@ class PhotoViewController: UIViewController, DetailViewControllerDelegate {
     }
     
 
-    func detailViewController(dvc: DetailViewController, photo: Photo, del: Bool) {
+    func detailViewController(dvc: DetailViewController, photo: Photo) {
         navigationController?.popToViewController(self, animated: true)
         
     }

@@ -198,7 +198,6 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="4Wq-vy-GgT">
                             <connections>
                                 <action selector="DeletePhoto:" destination="BYZ-38-t0r" id="oTC-GY-cvL"/>
-                                <segue destination="ZxK-zu-U5v" kind="unwind" unwindAction="unwind:" id="crp-6i-AxH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -209,6 +208,7 @@
                         <outlet property="txt_tags" destination="1BG-sR-y9F" id="4gv-aH-SC1"/>
                         <outlet property="txt_title" destination="6j8-Kn-80I" id="8Z8-lb-IJY"/>
                         <outlet property="txt_url" destination="4Mn-IM-RXV" id="g9e-4M-IvH"/>
+                        <segue destination="ZxK-zu-U5v" kind="unwind" identifier="Unwind" unwindAction="unwind:" id="d3D-Qz-REq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

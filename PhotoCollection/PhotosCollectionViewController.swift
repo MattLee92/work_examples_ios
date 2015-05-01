@@ -19,10 +19,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     var photos = Array<Photo>()
     var currentPhoto: Photo!
     var currentIndex: Int!
-    //deletePhoto returns true if delegate protocol returns true (i.e. user selected delete)
-    var deletePhoto: Bool = false
 
-    
     
     @IBAction func unwind(segue: UIStoryboardSegue){
         DeletePhoto()
@@ -30,10 +27,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     
     
     override func viewDidAppear(animated: Bool) {
-        //Check delete condition if true call DeletePhoto() function
-        if deletePhoto == true {
-            DeletePhoto()
-        }
+       
        
     }
     //This method calls the function to load data from file (persistance)
@@ -108,22 +102,18 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
        //Pass current photo to the Detailviewcontroller via the Delegate
         if let dvc = segue.destinationViewController as? DetailViewController {
-            println("dis tho")
             dvc.photo = currentPhoto
             dvc.delegate = self
         } else if let dvc = segue.destinationViewController as? PhotoViewController {
-            println("SEND  CURR")
-            
             dvc.photo = currentPhoto
             dvc.delegate = self
         }
     }
     
-    func detailViewController(dvc: DetailViewController, photo: Photo, del: Bool){
+    func detailViewController(dvc: DetailViewController, photo: Photo){
        navigationController?.popToViewController(self, animated: true)
            collectionView?.reloadData()
-            //Set delete photo to del (this will be true if the user has selected the delete option from DetailView)
-            deletePhoto = del
+   
    }
     func photoViewController(dvc: PhotoViewController,photo: Photo){
         navigationController?.popToViewController(self, animated: true)
@@ -172,7 +162,6 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
         //Set the current photo to what the user has selected and present the DetailView for said photo
         currentPhoto = photos[indexPath.row]
         //Set currentIndex in case user deletes photo
-        currentIndex = indexPath.row
         self.performSegueWithIdentifier("ShowFull", sender: self)
         return true
     }

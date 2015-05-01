@@ -11,7 +11,7 @@ import UIKit
 
 //Delegate protocol for DetailView
 protocol DetailViewControllerDelegate{
-    func detailViewController(dvc: DetailViewController, photo: Photo, del: Bool)
+    func detailViewController(dvc: DetailViewController, photo: Photo)
 }
 
 class DetailViewController: UIViewController, UITextFieldDelegate {
@@ -50,7 +50,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
                     photo.tags = tag.componentsSeparatedByCharactersInSet(sepChar)
                     photo.url = url
                     photo.data = nil
-                    delegate.detailViewController(self, photo: photo, del: false)
+                    delegate.detailViewController(self, photo: photo)
                 }
             }
         }
@@ -63,8 +63,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         //Configure delete action
         let deleteaction = UIAlertAction(title: "Delete", style: .Destructive){ alertAction in
             //Delete Photo
-            //delegate view controller returns 'true' for del(delete) thus data is deleted from model
-            self.delegate.detailViewController(self, photo: self.photo, del: true)
+            
+            
+            self.performSegueWithIdentifier("Unwind", sender: self)
         }
         //Configure cancel action
         let cancelaction = UIAlertAction(title: "Cancel", style: .Cancel){ alertAction in
