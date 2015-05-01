@@ -27,7 +27,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     
     
     override func viewDidAppear(animated: Bool) {
-       
+       SaveToFile()
        
     }
     //This method calls the function to load data from file (persistance)
@@ -65,6 +65,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     
     //Saves photos to property lists and writes to file
     private func SaveToFile(){
+        println("SAVING")
         //convert array of photos to NSArray of NSDictionary of photos.
         let arrayPLIST: NSArray = photos.map { $0.propertyListRep()}
         //Get the file path and name
@@ -113,11 +114,13 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     func detailViewController(dvc: DetailViewController, photo: Photo){
        navigationController?.popToViewController(self, animated: true)
            collectionView?.reloadData()
+
    
    }
     func photoViewController(dvc: PhotoViewController,photo: Photo){
         navigationController?.popToViewController(self, animated: true)
         collectionView?.reloadData()
+       
     }
   
     
@@ -150,7 +153,6 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
                 }
             }
         //Save any changes back to file
-        SaveToFile()
         return cell
     }
 
