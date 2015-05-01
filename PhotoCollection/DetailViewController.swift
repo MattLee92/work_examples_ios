@@ -29,7 +29,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     
     override func viewDidLoad() {
+         self.navigationController?.setNavigationBarHidden(false, animated: true)
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -47,13 +49,22 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
                     // Seperates Strings based on " " character (Whitespace) and adds them to the photo.tags array
                     let sepChar = NSCharacterSet(charactersInString: " ")
                     let tag = txt_tags.text
-                    photo.tags = tag.componentsSeparatedByCharactersInSet(sepChar)
+                    photo.tags =  tag.componentsSeparatedByCharactersInSet(sepChar)
                     photo.url = url
                     photo.data = nil
                     delegate.detailViewController(self, photo: photo)
                 }
             }
         }
+        
+        
+        //If a title or url has not been entered delete the empty photo
+        if ( txt_title.text == "" || txt_url.text == "" ){
+            
+            self.performSegueWithIdentifier("UnwindDel", sender: self)
+        }
+        
+        
     }
     
     //Configures and displays Delete option via UIAlert Sheet
@@ -63,9 +74,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         //Configure delete action
         let deleteaction = UIAlertAction(title: "Delete", style: .Destructive){ alertAction in
             //Delete Photo
-            //Peform the unwind segue that also calls the 'DeletePhoto' function if the
+            //Peform the unwindDel segue that also calls the 'DeletePhoto' function if the
             //user selects the delete option
-            
             self.performSegueWithIdentifier("UnwindDel", sender: self)
         }
         //Configure cancel action
@@ -104,8 +114,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     //Populates detail view with data from Photo if the user has selected a previous entry
     override func viewWillAppear(animated: Bool) {
-        
+       
         txt_title.text = photo.title
+       
         //Condition to stop reading non-existing elements from an empty array
         if photo.tags.count != 0 {
             // Reads each element from the photo.tags array and concatonates into a string
@@ -116,8 +127,6 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         txt_url.text = photo.url
         photo.data = nil
     }
-    
-    
 
 }
 

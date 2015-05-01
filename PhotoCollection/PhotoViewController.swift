@@ -8,6 +8,7 @@
 
 import UIKit
 
+//Delegate protocol for PhotoViewController
 protocol PhotoViewControllerDelegate{
     func photoViewController(dvc: PhotoViewController, photo: Photo)
 }
@@ -15,17 +16,21 @@ protocol PhotoViewControllerDelegate{
 
 class PhotoViewController: UIViewController, DetailViewControllerDelegate {
 
+    //Variables for PhotoView
     var delegate: PhotoViewControllerDelegate!
     var photo: Photo!
     
+    //ImageView outlet
     @IBOutlet weak var imageview: UIImageView!
     
 
     override func viewDidLoad() {
-       
+        //Hide navigation bars
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         super.viewDidLoad()
+        
+        //Get the photo to display from URL
         let urlString = photo.url
         let conToImage: (NSData?) -> Void = {
             if let d = $0 {
@@ -41,7 +46,7 @@ class PhotoViewController: UIViewController, DetailViewControllerDelegate {
         } else {
             photo.loadimage(conToImage)
         }
-        // Do any additional setup after loading the view.
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,6 +61,7 @@ class PhotoViewController: UIViewController, DetailViewControllerDelegate {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //if the destination view is the detail view controller then pass the current photo and set the delegate 
         if let dvc = segue.destinationViewController as? DetailViewController {
             dvc.photo = photo
             dvc.delegate = self

@@ -20,11 +20,14 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     var currentPhoto: Photo!
     var currentIndex: Int!
 
-    
+    //Unwind and delete segue. Called if the user selects the delete action from
+    //the action sheet in the detailview. Unwind and delete photo
     @IBAction func unwindDel(segue: UIStoryboardSegue){
+        
         DeletePhoto()
     }
     
+    //Segue unwinds with right swipe from detailview
     @IBAction func unwind(segue: UIStoryboardSegue){
       
     }
@@ -53,6 +56,8 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     @IBAction func AddPhoto(sender: AnyObject) {
         currentPhoto =  Photo()
         photos.append(currentPhoto)
+        //Set the current index to be the new empty photo
+        currentIndex = (photos.count - 1)
         performSegueWithIdentifier("ShowDetail", sender: self)
     }
     
@@ -167,6 +172,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
         //Set the current photo to what the user has selected and present the DetailView for said photo
         currentPhoto = photos[indexPath.row]
         //Set currentIndex in case user deletes photo
+        currentIndex = indexPath.row
         self.performSegueWithIdentifier("ShowFull", sender: self)
         return true
     }
