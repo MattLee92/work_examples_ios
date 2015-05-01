@@ -74,9 +74,9 @@ extension Photo {
     //Convenience init for reading from property list
     convenience init(PropertyList: NSDictionary){
         self.init()
-        title = PropertyList.objectForKey(titleKey) as String
-        tags = PropertyList.objectForKey(tagKey) as Array
-        url = PropertyList.objectForKey(urlKey) as String
+        title = PropertyList.objectForKey(titleKey) as! String
+        tags = PropertyList.objectForKey(tagKey)as! Array
+        url = PropertyList.objectForKey(urlKey)as! String
     }
 }
 

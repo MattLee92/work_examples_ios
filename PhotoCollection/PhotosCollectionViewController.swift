@@ -48,7 +48,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     @IBAction func AddPhoto(sender: AnyObject) {
         currentPhoto = Photo()
         photos.append(currentPhoto)
-        performSegueWithIdentifier("ShowDetail", sender: self)
+        performSegueWithIdentifier("ShowFull", sender: self)
     }
     
     //If user selects delete action photo is removed from array, collectionview is updated and plist file is updated
@@ -67,7 +67,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
         //convert array of photos to NSArray of NSDictionary of photos.
         let arrayPLIST: NSArray = photos.map { $0.propertyListRep()}
         //Get the file path and name
-        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! NSString
         let fileName = saveDir.stringByAppendingPathComponent("data.plist")
         //Write array to file
          arrayPLIST.writeToFile(fileName, atomically: true)
@@ -75,15 +75,16 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     
     private func LoadFromFile() {
          //Get the file path and name
-        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! NSString
         let fileName = saveDir.stringByAppendingPathComponent("data.plist")
         //Get dictionary of photos and convert them back to an array of photos
-        let fileContent = NSArray(contentsOfFile: fileName) as Array<NSDictionary>
+        if let fileContent = NSArray(contentsOfFile: fileName) as? Array<NSDictionary> {
         let arrayReadPhotos = fileContent.map{ Photo(PropertyList: $0)}
         //Put newly converted array of photos in models photo array
         photos = arrayReadPhotos
         //Refresh the colletion data
         collectionView?.reloadData()
+    }
     }
     
     
@@ -129,7 +130,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
 
     //Set the image for the Cells of the Collection view
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as PhotoCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PhotoCollectionViewCell
         let photo = photos[indexPath.row]
             if let d = photo.data {
                 let image = UIImage(data: d)
@@ -155,7 +156,7 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
         currentPhoto = photos[indexPath.row]
         //Set currentIndex in case user deletes photo
         currentIndex = indexPath.row
-        self.performSegueWithIdentifier("ShowDetail", sender: self)
+        self.performSegueWithIdentifier("ShowFull", sender: self)
         return true
     }
 

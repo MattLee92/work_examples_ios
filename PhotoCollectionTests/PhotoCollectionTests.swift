@@ -117,7 +117,7 @@ class PhotoCollectionTests: XCTestCase {
         //convert array of photos to NSArray of NSDictionary of photos.
         let arrayPLIST: NSArray = photos.map { $0.propertyListRep()}
         //Get the file path and name
-        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! NSString
         let fileName = saveDir.stringByAppendingPathComponent("data.plist")
         //Write array to file
         XCTAssertTrue(arrayPLIST.writeToFile(fileName, atomically: true), "Could not write")
@@ -126,10 +126,10 @@ class PhotoCollectionTests: XCTestCase {
     //Test load from File
     func TestLoadFromFile() {
         //Get the file path and name
-        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let saveDir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! NSString
         let fileName = saveDir.stringByAppendingPathComponent("data.plist")
         //Get dictionary of photos and convert them back to an array of photos
-        let fileContent = NSArray(contentsOfFile: fileName) as Array<NSDictionary>
+        let fileContent = NSArray(contentsOfFile: fileName) as! Array<NSDictionary>
         let arrayReadPhotos = fileContent.map{ Photo(PropertyList: $0)}
         XCTAssertNotNil(arrayReadPhotos, "Could not read")
      
