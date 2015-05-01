@@ -21,8 +21,12 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     var currentIndex: Int!
 
     
-    @IBAction func unwind(segue: UIStoryboardSegue){
+    @IBAction func unwindDel(segue: UIStoryboardSegue){
         DeletePhoto()
+    }
+    
+    @IBAction func unwind(segue: UIStoryboardSegue){
+      
     }
     
     
@@ -65,7 +69,6 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     
     //Saves photos to property lists and writes to file
     private func SaveToFile(){
-        println("SAVING")
         //convert array of photos to NSArray of NSDictionary of photos.
         let arrayPLIST: NSArray = photos.map { $0.propertyListRep()}
         //Get the file path and name
@@ -112,8 +115,8 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     }
     
     func detailViewController(dvc: DetailViewController, photo: Photo){
-       navigationController?.popToViewController(self, animated: true)
-           collectionView?.reloadData()
+        navigationController?.popToViewController(self, animated: true)
+        collectionView?.reloadData()
 
    
    }

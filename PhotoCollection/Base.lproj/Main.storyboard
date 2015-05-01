@@ -54,7 +54,7 @@
         <!--Photo View Controller-->
         <scene sceneID="P6M-Gm-Eem">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" id="z8A-bz-Edt" customClass="PhotoViewController" customModule="PhotoCollection" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController wantsFullScreenLayout="YES" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overFullScreen" hidesBottomBarWhenPushed="YES" id="z8A-bz-Edt" customClass="PhotoViewController" customModule="PhotoCollection" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7df-ak-Kuq"/>
                         <viewControllerLayoutGuide type="bottom" id="7gX-DM-rca"/>
@@ -63,8 +63,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ceY-vj-CU8">
-                                <rect key="frame" x="0.0" y="225" width="600" height="375"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ceY-vj-CU8">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="Fwf-Z3-qBr"/>
@@ -90,6 +90,7 @@
                             <outletCollection property="gestureRecognizers" destination="cNf-fY-Ylr" appends="YES" id="6f8-rh-8Bj"/>
                         </connections>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -164,6 +165,7 @@
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="1BG-sR-y9F" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1mb-OQ-2Qw"/>
                             <constraint firstAttribute="centerX" secondItem="VuV-jM-lYx" secondAttribute="centerX" constant="3" id="4vx-wN-Jfb"/>
@@ -187,6 +189,9 @@
                             <constraint firstAttribute="centerX" secondItem="f9G-Qj-6kw" secondAttribute="centerX" constant="4.5" id="xlH-fm-5kL"/>
                             <constraint firstAttribute="centerX" secondItem="Tct-67-y7C" secondAttribute="centerX" constant="-0.5" id="yE9-Os-F8K"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="bAc-ed-kk1" appends="YES" id="cSt-Th-7Na"/>
+                        </connections>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Photo Detail" id="efT-RL-fbJ">
@@ -208,11 +213,16 @@
                         <outlet property="txt_tags" destination="1BG-sR-y9F" id="4gv-aH-SC1"/>
                         <outlet property="txt_title" destination="6j8-Kn-80I" id="8Z8-lb-IJY"/>
                         <outlet property="txt_url" destination="4Mn-IM-RXV" id="g9e-4M-IvH"/>
-                        <segue destination="ZxK-zu-U5v" kind="unwind" identifier="Unwind" unwindAction="unwind:" id="d3D-Qz-REq"/>
+                        <segue destination="ZxK-zu-U5v" kind="unwind" identifier="UnwindDel" unwindAction="unwind:" id="d3D-Qz-REq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="ZxK-zu-U5v" userLabel="Exit" sceneMemberID="exit"/>
+                <swipeGestureRecognizer direction="right" id="bAc-ed-kk1">
+                    <connections>
+                        <segue destination="ZxK-zu-U5v" kind="unwind" identifier="Unwind" unwindAction="unwind:" id="5UO-Tc-504"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1444" y="106"/>
         </scene>
@@ -236,6 +246,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8e6-c5-WF1"/>
+        <segue reference="IBk-iJ-tFO"/>
     </inferredMetricsTieBreakers>
 </document>

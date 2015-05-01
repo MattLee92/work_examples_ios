@@ -20,7 +20,11 @@ class PhotoViewController: UIViewController, DetailViewControllerDelegate {
     
     @IBOutlet weak var imageview: UIImageView!
     
+
     override func viewDidLoad() {
+       
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
         super.viewDidLoad()
         let urlString = photo.url
         let conToImage: (NSData?) -> Void = {

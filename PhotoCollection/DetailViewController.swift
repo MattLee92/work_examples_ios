@@ -63,9 +63,10 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         //Configure delete action
         let deleteaction = UIAlertAction(title: "Delete", style: .Destructive){ alertAction in
             //Delete Photo
+            //Peform the unwind segue that also calls the 'DeletePhoto' function if the
+            //user selects the delete option
             
-            
-            self.performSegueWithIdentifier("Unwind", sender: self)
+            self.performSegueWithIdentifier("UnwindDel", sender: self)
         }
         //Configure cancel action
         let cancelaction = UIAlertAction(title: "Cancel", style: .Cancel){ alertAction in
