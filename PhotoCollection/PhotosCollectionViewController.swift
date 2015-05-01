@@ -13,7 +13,7 @@ let reuseIdentifier = "Cell"
 
 
 
-class PhotosCollectionViewController: UICollectionViewController, DetailViewControllerDelegate  {
+class PhotosCollectionViewController: UICollectionViewController, DetailViewControllerDelegate, PhotoViewControllerDelegate  {
 
     //Variables for Photos
     var photos = Array<Photo>()
@@ -22,6 +22,13 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     //deletePhoto returns true if delegate protocol returns true (i.e. user selected delete)
     var deletePhoto: Bool = false
 
+    
+    
+    @IBAction func unwind(segue: UIStoryboardSegue){
+        DeletePhoto()
+    }
+    
+    
     override func viewDidAppear(animated: Bool) {
         //Check delete condition if true call DeletePhoto() function
         if deletePhoto == true {
@@ -46,9 +53,9 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     //Adds a new 'empty' instance of photo and saves it to the photos array
     //segues to detail for for user to enter data
     @IBAction func AddPhoto(sender: AnyObject) {
-        currentPhoto = Photo()
+        currentPhoto =  Photo()
         photos.append(currentPhoto)
-        performSegueWithIdentifier("ShowFull", sender: self)
+        performSegueWithIdentifier("ShowDetail", sender: self)
     }
     
     //If user selects delete action photo is removed from array, collectionview is updated and plist file is updated
@@ -101,6 +108,12 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
        //Pass current photo to the Detailviewcontroller via the Delegate
         if let dvc = segue.destinationViewController as? DetailViewController {
+            println("dis tho")
+            dvc.photo = currentPhoto
+            dvc.delegate = self
+        } else if let dvc = segue.destinationViewController as? PhotoViewController {
+            println("SEND  CURR")
+            
             dvc.photo = currentPhoto
             dvc.delegate = self
         }
@@ -112,6 +125,10 @@ class PhotosCollectionViewController: UICollectionViewController, DetailViewCont
             //Set delete photo to del (this will be true if the user has selected the delete option from DetailView)
             deletePhoto = del
    }
+    func photoViewController(dvc: PhotoViewController,photo: Photo){
+        navigationController?.popToViewController(self, animated: true)
+        collectionView?.reloadData()
+    }
   
     
 

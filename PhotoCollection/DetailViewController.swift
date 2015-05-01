@@ -102,6 +102,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     //Populates detail view with data from Photo if the user has selected a previous entry
     override func viewWillAppear(animated: Bool) {
+        
         txt_title.text = photo.title
         //Condition to stop reading non-existing elements from an empty array
         if photo.tags.count != 0 {

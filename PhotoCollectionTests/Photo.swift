@@ -21,12 +21,10 @@ class Photo {
     
     //Initialise variables
     init(){//title: String, tags: [String], url: String){
-        title = ""
-        tags = []
-        url = ""
+        self.title = ""
+        self.tags = []
+        self.url = ""
         
-        
-    
     }
         
     //Downloads data from given URL and converts to image
